@@ -18,11 +18,19 @@ class Gatherings {
     }
 
     constructor() {
-        get_data(this.API_URL, data => console.log("got data", data))
+        get_data(this.API_URL, data => this.apis = data);
     }
 }
 
 const YourData = ({choices}) => <div>Your data: {choices}</div>;
+
+
+const Apis = ({apis}) => <div>
+    <ul>
+        {apis.map(item => <li key={item.id}>{item.title}</li>)}
+    </ul>
+</div>;
+
 
 @observer
 class Gather extends React.Component<{gatherings: Gatherings}, {}> {
@@ -32,11 +40,12 @@ class Gather extends React.Component<{gatherings: Gatherings}, {}> {
     }
 
     render() {
-        var {choices} = gatherings;
+        var {choices, apis} = gatherings;
         return (
             <div>
                 <input value={choices} placeholder="your data" onChange={this.change} />
                 <YourData choices={choices} />
+                {apis? <Apis apis={apis} /> : null}
                 <DevTools />
             </div>
         );
