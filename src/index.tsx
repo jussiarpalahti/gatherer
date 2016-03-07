@@ -3,13 +3,22 @@ import * as ReactDOM from 'react-dom';
 import {observable, autorun} from 'mobx';
 import {observer} from 'mobx-react';
 import DevTools from 'mobx-react-devtools';
+import 'isomorphic-fetch';
+import {get_data} from './lib/piper';
 
 class Gatherings {
 
+    API_URL = "http://localhost:8000/apis";
+
     @observable choices = "";
+    @observable apis = [];
 
     makeChange(val) {
         this.choices = val;
+    }
+
+    constructor() {
+        get_data(this.API_URL, data => console.log("got data", data))
     }
 }
 

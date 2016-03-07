@@ -3,8 +3,7 @@ import R from "ramda";
 import * as _ from "lodash";
 
 
-function get_data (callback) {
-    let url = 'http://localhost:8000/';
+function get_data (url, callback) {
     console.log("piper called");
     var f = R.pipeP(
         () => fetch(url),

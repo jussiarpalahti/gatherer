@@ -25,6 +25,14 @@ module.exports = {
       test: /\.tsx?$/,
       loaders: ['react-hot', 'ts-loader'],
       include: path.join(__dirname, 'src')
-    }]
+    },
+      {
+        test: /\.js?$/,
+        exclude: /(node_modules|bower_components)/,
+        loader: 'babel',
+        query: {
+          presets: ['es2015']
+        }
+      }]
   }
 };
