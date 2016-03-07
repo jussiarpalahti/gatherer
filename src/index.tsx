@@ -43,6 +43,24 @@ class Gatherings {
 }
 
 
+const Type1 = ({api}) => <div>Type1: {api.id}</div>;
+
+
+const Type2 = ({api}) => <div>Type2: {api.id}</div>;
+
+
+function get_api_view(api_type) {
+    switch (api_type) {
+        case "type1":
+            return Type1;
+        case "type2":
+            return Type2;
+        default:
+            return null;
+    }
+}
+
+
 const YourData = ({choices}) => <div>Your data: {choices}</div>;
 
 
@@ -53,9 +71,7 @@ const Apis = ({apis, choose}) => <div>
 </div>;
 
 
-const Items = ({api}) => <div key={"item_" + api.api.id}>
-    <span>{api.api.id}</span>
-</div>;
+const Items = ({choice}) => <div>{get_api_view(choice.api.type)(choice)}</div>;
 
 
 @observer
@@ -70,13 +86,13 @@ class Gather extends React.Component<{gatherings: Gatherings}, {}> {
     }
 
     render() {
-        var {choices, apis, choose, chosen} = gatherings;
+        var {choices, apis, chosen} = gatherings;
         return (
             <div>
                 <input value={choices} placeholder="your data" onChange={this.change} />
                 <YourData choices={choices} />
                 {apis? <Apis apis={apis} choose={this.makeChoice} /> : null}
-                {chosen.map((api,i) => <div key={"items_" + i}><Items api={api} /></div>)}
+                {chosen.map((choice, i) => <div key={"items_" + i}><Items choice={choice} /></div>)}
                 <DevTools />
             </div>
         );
