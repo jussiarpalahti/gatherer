@@ -1,3 +1,11 @@
 node_modules/
 static/bundle.js
 *~
+.idea
+coverage
+node_modules
+build
+*.mo
+*.sqlite
+/data/
+/.DS_Store
