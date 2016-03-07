@@ -61,7 +61,7 @@ function get_api_view(api_type) {
 }
 
 
-const YourData = ({choices}) => <div>Your data: {choices}</div>;
+const YourData = ({choices}) => <div>Your precious data: {choices}</div>;
 
 
 const Apis = ({apis, choose}) => <div>
